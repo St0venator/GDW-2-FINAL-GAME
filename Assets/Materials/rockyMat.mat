@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rockyMat
+  m_Shader: {fileID: -6465566751694194690, guid: 9955ce490ddddf04a8ee6df373e10cde, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_063b47241d054074826c26fac4a4211c_Texture_1:
+        m_Texture: {fileID: 2800000, guid: ac1d5f2fbf14d4647950c72cc9cb8ed1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_24b987749f9445ee9c980f4048a2eb6e_Texture_1:
+        m_Texture: {fileID: 2800000, guid: ee69efb34aa8f664f9813729ffe8270f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_7c60c9d151b644719e9ba9f3e0200ad9_Texture_1:
+        m_Texture: {fileID: 2800000, guid: ac1d5f2fbf14d4647950c72cc9cb8ed1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ea816d337f314ee4bbf01c7798b1ec05_Texture_1:
+        m_Texture: {fileID: 2800000, guid: ee69efb34aa8f664f9813729ffe8270f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Amplitude: 358.81
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _tiling: 3.38
+    - _var1: 0
+    - _var2: 0.927
+    m_Colors: []
+  m_BuildTextureStacks: []
+--- !u!114 &3783563644213533343
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
