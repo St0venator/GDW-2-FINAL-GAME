@@ -30,8 +30,6 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Facing the player towards the center of the mountain, along the Y-axis at the center
-        transform.LookAt(new Vector3(yAxisTarget.position.x, transform.position.y, yAxisTarget.position.z));
 
 
         //If the player hits Left Shift, stop all current climb coroutines, and start a new one targeting the node the cursor is selecting
