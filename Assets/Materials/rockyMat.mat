@@ -38,13 +38,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amplitude: 358.81
+    - _Amplitude: 54.7
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _tiling: 3.38
+    - _rockStepEdge: 0.36
+    - _tiling: 8.16
     - _var1: 0
-    - _var2: 0.927
-    m_Colors: []
+    - _var2: 1
+    m_Colors:
+    - _rockColor1: {r: 0.20093024, g: 0.34325582, b: 0.36, a: 0}
+    - _rockColor2: {r: 0.10016129, g: 0.11351613, b: 0.207, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3783563644213533343
 MonoBehaviour:
