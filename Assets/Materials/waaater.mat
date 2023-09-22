@@ -58,14 +58,14 @@ Material:
     - _Alpha: 0.8
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _Floor: 2.05
+    - _Floor: 2
     - _Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
     - _fresnelMax: 1
     - _fresnelMin: 0
-    - _fresnelPower: 1
+    - _fresnelPower: 0.67
     - _speed1: 0.04
     - _speed2: 0.01
     - _tiling1: 0.1
@@ -76,3 +76,16 @@ Material:
     - _dir1: {r: 1, g: 1, b: 0, a: 0}
     - _dir2: {r: -1, g: -1, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &4092902264770284248
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
