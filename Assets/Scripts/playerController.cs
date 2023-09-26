@@ -18,6 +18,7 @@ public class playerController : MonoBehaviour
     Rigidbody rb;
     [SerializeField] Transform wallRef;
     Transform yAxisTarget;
+    [SerializeField] GameObject worldCursor;
 
     // Start is called before the first frame update
     void Start()
@@ -38,14 +39,14 @@ public class playerController : MonoBehaviour
             StopAllCoroutines();
 
             //If the current node is above the player, climbing
-            if(nodeManager.instance.currNode.y >= transform.position.y)
+            if(worldCursor.transform.position.y >= transform.position.y)
             {
-                StartCoroutine(climb(nodeManager.instance.currNode, climbSpeed));
+                StartCoroutine(climb(worldCursor.transform.position, climbSpeed));
             }
             //Otherwise, fall
             else
             {
-                StartCoroutine(fall(nodeManager.instance.currNode, climbSpeed));
+                StartCoroutine(fall(worldCursor.transform.position, climbSpeed));
             }
             
         }
@@ -86,7 +87,7 @@ public class playerController : MonoBehaviour
             yield return null;
         }
 
-        nodeManager.instance.updateNodes();
+        //nodeManager.instance.updateNodes();
     }
 
     public IEnumerator fall(Vector3 dest, float speed)
@@ -124,6 +125,6 @@ public class playerController : MonoBehaviour
             yield return null;
         }
 
-        nodeManager.instance.updateNodes();
+        //nodeManager.instance.updateNodes();
     }
 }

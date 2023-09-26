@@ -1091,6 +1091,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 18307938775659596, guid: ea03cdb92f96fef44b99c815c991def2, type: 3}
+      propertyPath: worldCursor
+      value: 
+      objectReference: {fileID: 1331092457}
+    - target: {fileID: 18307938775659596, guid: ea03cdb92f96fef44b99c815c991def2, type: 3}
       propertyPath: fallCurve.m_Curve.Array.size
       value: 2
       objectReference: {fileID: 0}
