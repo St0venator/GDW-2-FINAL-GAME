@@ -38,14 +38,14 @@ public class playerController : MonoBehaviour
             StopAllCoroutines();
 
             //If the current node is above the player, climbing
-            if(nodeManager.instance.currNode.transform.position.y >= transform.position.y)
+            if(nodeManager.instance.currNode.y >= transform.position.y)
             {
-                StartCoroutine(climb(nodeManager.instance.currNode.transform.position, climbSpeed));
+                StartCoroutine(climb(nodeManager.instance.currNode, climbSpeed));
             }
             //Otherwise, fall
             else
             {
-                StartCoroutine(fall(nodeManager.instance.currNode.transform.position, climbSpeed));
+                StartCoroutine(fall(nodeManager.instance.currNode, climbSpeed));
             }
             
         }
@@ -76,15 +76,17 @@ public class playerController : MonoBehaviour
         Vector3 newDest = dest - midPoint;
 
         //LERPing towards "dest" until we reach the end of our animation curve
-        while(pos <= 1.5f)
+        while(pos <= 0.6f)
         {
 
             //Moving n% of the way between our start and end positions, with n being the y-value of our animation curve at x = "pos"
-            transform.position = Vector3.Slerp(newStart, newDest, climbCurve.Evaluate(pos / 0.3f)) + midPoint;
-            pos = Mathf.MoveTowards(pos, 1.0f, speed * Time.deltaTime);
+            transform.position = Vector3.Slerp(newStart, newDest, climbCurve.Evaluate(pos)) + midPoint;
+            pos = Mathf.MoveTowards(pos, 1.0f, speed * Time.deltaTime * 3);
 
             yield return null;
         }
+
+        nodeManager.instance.updateNodes();
     }
 
     public IEnumerator fall(Vector3 dest, float speed)
@@ -116,11 +118,12 @@ public class playerController : MonoBehaviour
         {
 
             //Moving n% of the way between our start and end positions, with n being the y-value of our animation curve at x = "pos"
-            transform.position = Vector3.Slerp(newStart, newDest, fallCurve.Evaluate(pos / 0.3f)) + midPoint;
-            pos = Mathf.MoveTowards(pos, 1.0f, speed * Time.deltaTime);
+            transform.position = Vector3.Slerp(newStart, newDest, fallCurve.Evaluate(pos)) + midPoint;
+            pos = Mathf.MoveTowards(pos, 1.0f, speed * Time.deltaTime * 3);
 
             yield return null;
         }
 
+        nodeManager.instance.updateNodes();
     }
 }
