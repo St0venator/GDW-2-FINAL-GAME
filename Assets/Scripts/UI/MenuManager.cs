@@ -6,13 +6,31 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    
+    public GameObject loadingScene;
+    public Slider slider;
+
+
     public void ToGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        StartCoroutine(LoadAsynchronously());
     }
 
+    IEnumerator LoadAsynchronously()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync("SampleScene");
 
+        while (!operation.isDone)
+        {
+            loadingScene.SetActive(true);
+
+
+            float progress = Mathf.Clamp01(operation.progress/ 0.9f);
+            slider.value = progress;
+
+
+            yield return null;
+        }
+    }
 
 
 
