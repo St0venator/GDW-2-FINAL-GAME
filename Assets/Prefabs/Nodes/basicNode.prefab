@@ -111,4 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisType: 0
+  connectingNode: {fileID: 0}
   isClicked: 0
+  isFallNode: 0
