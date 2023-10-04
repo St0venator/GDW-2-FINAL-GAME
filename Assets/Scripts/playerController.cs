@@ -37,10 +37,11 @@ public class playerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift)) 
         {
             StopAllCoroutines();
-
+            
             //If the current node is above the player, climbing
-            if(worldCursor.transform.position.y >= transform.position.y)
+            if (worldCursor.transform.position.y >= transform.position.y)
             {
+                
                 StartCoroutine(climb(worldCursor.transform.position, climbSpeed));
             }
             //Otherwise, fall
@@ -67,6 +68,19 @@ public class playerController : MonoBehaviour
 
         //Keeping the player in front of the wall, from the camera's POV by moving the player slightly closer to the camera
         dest = Vector3.MoveTowards(dest, Camera.main.transform.position, 0.1f);
+
+        Vector3 destDist = dest - startPos;
+
+        if(destDist.magnitude > 10)
+        {
+            destDist = destDist.normalized * 10;
+
+            dest = startPos + destDist;
+
+            Physics.Raycast(new Ray(new Vector3(dest.x, dest.y), new Vector3(0, 0, 1)), out RaycastHit hit, float.MaxValue);
+
+            dest.z = hit.point.z;
+        }
 
         //Calculating the midpoint between the current and target nodes, and them moving it away from the camera
         Vector3 midPoint = (dest + startPos) / 2;
@@ -105,6 +119,19 @@ public class playerController : MonoBehaviour
 
         //Keeping the player in front of the wall, from the camera's POV by moving the player slightly closer to the camera
         dest = Vector3.MoveTowards(dest, Camera.main.transform.position, 0.1f);
+
+        Vector3 destDist = dest - startPos;
+
+        if (destDist.magnitude > 10)
+        {
+            destDist = destDist.normalized * 10;
+
+            dest = startPos + destDist;
+
+            Physics.Raycast(new Ray(new Vector3(dest.x, dest.y), new Vector3(0, 0, 1)), out RaycastHit hit, float.MaxValue);
+
+            dest.z = hit.point.z;
+        }
 
         //Calculating the midpoint between the current and target nodes, and them moving it away from the camera
         Vector3 midPoint = (dest + startPos) / 2;
