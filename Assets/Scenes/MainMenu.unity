@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 632555620}
   - component: {fileID: 632555619}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,6 +419,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScene: {fileID: 1443296301}
   slider: {fileID: 1102165908}
+  PausePanel: {fileID: 0}
+  PauseButton: {fileID: 0}
+  UnPauseButton: {fileID: 0}
 --- !u!4 &632555620
 Transform:
   m_ObjectHideFlags: 0
@@ -520,14 +523,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632555619}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: ToGame
-        m_Mode: 1
+        m_MethodName: ToScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: SampleScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &701589445
