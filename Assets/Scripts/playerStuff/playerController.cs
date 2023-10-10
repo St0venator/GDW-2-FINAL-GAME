@@ -15,13 +15,15 @@ public class playerController : MonoBehaviour
     //The height a node needs to be above the player to be considered valid
     public float upLimit;
 
-    //Bool controlling when the player is using the sword
+    //Bool controlling when the player is using the sword or jumping at all
     bool isSlash = false;
+    bool isJump = false;
 
     //References
     Rigidbody rb;
     [SerializeField] GameObject worldCursor;
     [SerializeField] GameObject childObj;
+    [SerializeField] GameObject bulletRef;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,13 @@ public class playerController : MonoBehaviour
         {
             Debug.Log("doing the input");
             isSlash = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canJump)
+        {
+            GameObject bullet = Instantiate(bulletRef, transform.position, Quaternion.identity);
+            bullet.transform.position -= new Vector3(0, 0, 10);
+            bullet.GetComponent<bulletController>().velocity = (worldCursor.transform.position - transform.position).normalized * 10;
         }
 
         //If the player hits Left Shift, stop all current climb coroutines, and start a new one targeting the node the cursor is selecting

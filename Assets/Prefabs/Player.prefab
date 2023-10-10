@@ -169,3 +169,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fallCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  climbSpeed: 0
+  upLimit: 0
+  worldCursor: {fileID: 0}
+  childObj: {fileID: 0}
+  bulletRef: {fileID: 0}
