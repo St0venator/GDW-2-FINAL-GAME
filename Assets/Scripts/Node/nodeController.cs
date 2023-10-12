@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class nodeController : MonoBehaviour
 {
+    /*
     //nodeType enums, JiC
-    public enum nodeType {Basic, Booster}
-    public nodeType thisType;
-    private bool canBoost = true;
+    //public enum nodeType {Basic, Booster}
+    //public nodeType thisType;
+    //private bool canBoost = true;
 
     //References
     GameObject playerRef;
     playerController playerScript;
     Material mat;
-    public GameObject connectingNode = null;
+    //public GameObject connectingNode = null;
 
     //Checking if it's the active node
     [HideInInspector] public bool isClicked;
     
     //Maybe deprecated??
-    public bool isFallNode = false;
+    //public bool isFallNode = false;
 
     // Start is called before the first frame update
     void Start()
@@ -87,4 +88,3 @@ public class nodeController : MonoBehaviour
         }
         */
     }
-}
