@@ -1,20 +1,27 @@
 /*
  * Biiiiiiiiig todo, turn this into an editor script so we can use it to create scenes
+ * Biiiiiiiiigger todo, kill myself, then make a geometry/vertex shader to GPU instance the nodes
  */
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class nodeGenerator : MonoBehaviour
 {
     Vector3[] objectVerts;
-    public GameObject nodeRef;
+    Vector3[] nodes;
+    public Vector3[] clippedNodes;
     // Start is called before the first frame update
     void Start()
     {
         objectVerts = GetComponent<MeshFilter>().mesh.vertices;
         MeshCollider mc = gameObject.AddComponent<MeshCollider>();
+
+        nodes = new Vector3[objectVerts.Length];
+
+        int i = 0;
 
         //Generating a random offset for our perlin noise
         float offSet = Random.Range(0.0f, 10.0f);
@@ -30,10 +37,17 @@ public class nodeGenerator : MonoBehaviour
 
             if(rand >= 0.5f)
             {
-                //Instantiate the worldspace node if it passes the noise map
-                Instantiate(nodeRef, newVert, Quaternion.identity);
+                //append the new node to the list of nodes
+                nodes[i] = newVert;
+                i++;
             }
             
         }
+
+        clippedNodes = new Vector3[i + 1];
+
+        clippedNodes = nodes[0..(clippedNodes.Length - 1)];
+        nodeManager.instance.allNodes = clippedNodes.ToList();
+        nodeManager.instance.updateNodes();
     }
 }

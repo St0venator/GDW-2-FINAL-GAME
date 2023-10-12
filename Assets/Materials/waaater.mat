@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8327841858159663111
+--- !u!114 &-7695507340570354538
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,11 +20,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: rockyMat
-  m_Shader: {fileID: -6465566751694194690, guid: 9955ce490ddddf04a8ee6df373e10cde, type: 3}
+  m_Name: waaater
+  m_Shader: {fileID: -6465566751694194690, guid: 061f6d35e9cf13543a9ae9fb119f00c4, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -33,20 +33,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_063b47241d054074826c26fac4a4211c_Texture_1:
-        m_Texture: {fileID: 2800000, guid: ac1d5f2fbf14d4647950c72cc9cb8ed1, type: 3}
+    - _SampleTexture2D_6e778ebc47834545a90f5af29ce48280_Texture_1:
+        m_Texture: {fileID: 2800000, guid: d72022aa323a99a4a9c7a0fc2a4f0e8c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_24b987749f9445ee9c980f4048a2eb6e_Texture_1:
-        m_Texture: {fileID: 2800000, guid: ee69efb34aa8f664f9813729ffe8270f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_7c60c9d151b644719e9ba9f3e0200ad9_Texture_1:
-        m_Texture: {fileID: 2800000, guid: ac1d5f2fbf14d4647950c72cc9cb8ed1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_ea816d337f314ee4bbf01c7798b1ec05_Texture_1:
-        m_Texture: {fileID: 2800000, guid: ee69efb34aa8f664f9813729ffe8270f, type: 3}
+    - _SampleTexture2D_7e7d083a8aed40d2b2c7cc68e0ac808e_Texture_1:
+        m_Texture: {fileID: 2800000, guid: d72022aa323a99a4a9c7a0fc2a4f0e8c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -63,20 +55,28 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amplitude: 54.7
+    - _Alpha: 0.8
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _Floor: 2
+    - _Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _rockStepEdge: 1
-    - _tiling: 8.16
-    - _var1: 0
-    - _var2: 1
+    - _Smoothness: 0
+    - _fresnelMax: 1
+    - _fresnelMin: 0
+    - _fresnelPower: 0.67
+    - _speed1: 0.04
+    - _speed2: 0.01
+    - _tiling1: 0.1
+    - _tiling2: 0.1
     m_Colors:
-    - _rockColor1: {r: 0, g: 0.23584908, b: 0.22092745, a: 0}
-    - _rockColor2: {r: 0.5330188, g: 0.63344145, b: 1, a: 0}
+    - _Color1: {r: 0, g: 0.026012553, b: 0.81960785, a: 0}
+    - _Color2: {r: 0.41960788, g: 0.7134852, b: 1, a: 0}
+    - _dir1: {r: 1, g: 1, b: 0, a: 0}
+    - _dir2: {r: -1, g: -1, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &3783563644213533343
+--- !u!114 &4092902264770284248
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

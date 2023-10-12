@@ -10,19 +10,25 @@ public class playerController : MonoBehaviour
 
     //The speed the player jumps up to another node
     [SerializeField] private float climbSpeed;
+    bool canJump = true;
 
     //The height a node needs to be above the player to be considered valid
     public float upLimit;
 
+    //Bool controlling when the player is using the sword or jumping at all
+    bool isSlash = false;
+    bool isJump = false;
+
     //References
     Rigidbody rb;
-    [SerializeField] Transform wallRef;
-    Transform yAxisTarget;
+    [SerializeField] GameObject worldCursor;
+    [SerializeField] GameObject childObj;
+    [SerializeField] GameObject bulletRef;
 
     // Start is called before the first frame update
     void Start()
     {
-        yAxisTarget = wallRef;
+
         rb = GetComponent<Rigidbody>();
         climbSpeed /= 100f;
     }
@@ -30,24 +36,34 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Facing the player towards the center of the mountain, along the Y-axis at the center
-        transform.LookAt(new Vector3(yAxisTarget.position.x, transform.position.y, yAxisTarget.position.z));
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("doing the input");
+            isSlash = true;
+        }
 
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canJump)
+        {
+            GameObject bullet = Instantiate(bulletRef, transform.position, Quaternion.identity);
+            bullet.transform.position -= new Vector3(0, 0, 10);
+            bullet.GetComponent<bulletController>().velocity = (worldCursor.transform.position - transform.position).normalized * 10;
+        }
 
         //If the player hits Left Shift, stop all current climb coroutines, and start a new one targeting the node the cursor is selecting
-        if (Input.GetKeyDown(KeyCode.LeftShift)) 
+        if (Input.GetMouseButtonDown(1) && canJump) 
         {
             StopAllCoroutines();
-
+            
             //If the current node is above the player, climbing
-            if(nodeManager.instance.currNode.transform.position.y >= transform.position.y)
+            if (worldCursor.transform.position.y >= transform.position.y)
             {
-                StartCoroutine(climb(nodeManager.instance.currNode.transform.position, climbSpeed));
+                
+                StartCoroutine(climb(worldCursor.transform.position, climbSpeed));
             }
             //Otherwise, fall
             else
             {
-                StartCoroutine(fall(nodeManager.instance.currNode.transform.position, climbSpeed));
+                StartCoroutine(fall(worldCursor.transform.position, climbSpeed));
             }
             
         }
@@ -62,12 +78,26 @@ public class playerController : MonoBehaviour
          * climb: Moves the player from one node to another by LERPing, sampling an animation curve
         */
 
-        //Resetting all of our variables, starting the animation curve at -0.1, and our starting position as our current position
+        //Resetting all of our variables, starting the animation curve at 0, and our starting position as our current position
         float pos = 0.0f;
         Vector3 startPos = transform.position;
+        canJump = false;
 
         //Keeping the player in front of the wall, from the camera's POV by moving the player slightly closer to the camera
         dest = Vector3.MoveTowards(dest, Camera.main.transform.position, 0.1f);
+
+        Vector3 destDist = dest - startPos;
+
+        if(destDist.magnitude > 10)
+        {
+            destDist = destDist.normalized * 10;
+
+            dest = startPos + destDist;
+
+            Physics.Raycast(new Ray(new Vector3(dest.x, dest.y), new Vector3(0, 0, 1)), out RaycastHit hit, float.MaxValue);
+
+            dest.z = hit.point.z;
+        }
 
         //Calculating the midpoint between the current and target nodes, and them moving it away from the camera
         Vector3 midPoint = (dest + startPos) / 2;
@@ -77,16 +107,43 @@ public class playerController : MonoBehaviour
         Vector3 newStart = startPos - midPoint;
         Vector3 newDest = dest - midPoint;
 
+        bool innerIsSlash = isSlash;
+        Debug.Log(innerIsSlash);
+
+        if (innerIsSlash)
+        {
+            childObj.SetActive(true);
+        }
         //LERPing towards "dest" until we reach the end of our animation curve
-        while(pos <= 1.5f)
+        while(pos < 1f)
         {
 
             //Moving n% of the way between our start and end positions, with n being the y-value of our animation curve at x = "pos"
-            transform.position = Vector3.Slerp(newStart, newDest, climbCurve.Evaluate(pos / 0.3f)) + midPoint;
-            pos = Mathf.MoveTowards(pos, 1.0f, speed * Time.deltaTime);
+            transform.position = Vector3.Slerp(newStart, newDest, climbCurve.Evaluate(pos)) + midPoint;
+            pos = Mathf.MoveTowards(pos, 1.0f, speed * Time.deltaTime * 3);
+
+            if(pos > 0.2f && innerIsSlash)
+            {
+                childObj.SetActive(false);
+                innerIsSlash = false;
+                isSlash = false;
+            }
+
+            if (pos > 0.4f && !isSlash)
+            {
+                canJump = true;
+                
+            }
+            else if(pos > 0.6f)
+            {
+                canJump = true;
+            }
 
             yield return null;
         }
+        childObj.SetActive(false);
+        canJump = true;
+        
     }
 
     public IEnumerator fall(Vector3 dest, float speed)
@@ -101,9 +158,23 @@ public class playerController : MonoBehaviour
         //Resetting all of our variables, starting the animation curve at -0.1, and our starting position as our current position
         float pos = 0.0f;
         Vector3 startPos = transform.position;
+        canJump = false;
 
         //Keeping the player in front of the wall, from the camera's POV by moving the player slightly closer to the camera
         dest = Vector3.MoveTowards(dest, Camera.main.transform.position, 0.1f);
+
+        Vector3 destDist = dest - startPos;
+
+        if (destDist.magnitude > 10)
+        {
+            destDist = destDist.normalized * 10;
+
+            dest = startPos + destDist;
+
+            Physics.Raycast(new Ray(new Vector3(dest.x, dest.y), new Vector3(0, 0, 1)), out RaycastHit hit, float.MaxValue);
+
+            dest.z = hit.point.z;
+        }
 
         //Calculating the midpoint between the current and target nodes, and them moving it away from the camera
         Vector3 midPoint = (dest + startPos) / 2;
@@ -113,16 +184,31 @@ public class playerController : MonoBehaviour
         Vector3 newStart = startPos - midPoint;
         Vector3 newDest = dest - midPoint;
 
+        //childObj.SetActive(true);
         //LERPing towards "dest" until we reach x = 1.1 on our animation curve
-        while (pos <= 1.5f)
+        while (pos < 1)
         {
 
             //Moving n% of the way between our start and end positions, with n being the y-value of our animation curve at x = "pos"
-            transform.position = Vector3.Slerp(newStart, newDest, fallCurve.Evaluate(pos / 0.3f)) + midPoint;
-            pos = Mathf.MoveTowards(pos, 1.0f, speed * Time.deltaTime);
+            transform.position = Vector3.Slerp(newStart, newDest, fallCurve.Evaluate(pos)) + midPoint;
+            pos = Mathf.MoveTowards(pos, 1.0f, speed * Time.deltaTime * 3);
+
+            /*
+            if (pos > 0.2f)
+            {
+                childObj.SetActive(false);
+            }
+            */
+
+            if (pos > 0.4f)
+            {
+                canJump = true;
+            }
 
             yield return null;
         }
-
+        childObj.SetActive(false);
+        canJump = true;
+        //nodeManager.instance.updateNodes();
     }
 }
