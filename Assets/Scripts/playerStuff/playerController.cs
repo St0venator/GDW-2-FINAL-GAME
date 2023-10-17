@@ -44,6 +44,7 @@ public class playerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && canJump)
         {
+            //Bullet SFX here
             GameObject bullet = Instantiate(bulletRef, transform.position, Quaternion.identity);
             bullet.transform.position -= new Vector3(0, 0, 10);
             bullet.GetComponent<bulletController>().velocity = (worldCursor.transform.position - transform.position).normalized * 10;
@@ -124,6 +125,7 @@ public class playerController : MonoBehaviour
 
             if(pos > 0.2f && innerIsSlash)
             {
+                //Slash SFX here
                 childObj.SetActive(false);
                 innerIsSlash = false;
                 isSlash = false;
