@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
+    // Getting a referance to the sound manager
+    [SerializeField]public SoundManager SoundManager;
+
     //The animation curves the player follows when they jump from one node to another
     [SerializeField] private AnimationCurve climbCurve;
     [SerializeField] private AnimationCurve fallCurve;
@@ -47,13 +50,14 @@ public class playerController : MonoBehaviour
             GameObject bullet = Instantiate(bulletRef, transform.position, Quaternion.identity);
             bullet.transform.position -= new Vector3(0, 0, 10);
             bullet.GetComponent<bulletController>().velocity = (worldCursor.transform.position - transform.position).normalized * 10;
+            
         }
 
         //If the player hits Left Shift, stop all current climb coroutines, and start a new one targeting the node the cursor is selecting
         if (Input.GetMouseButtonDown(1) && canJump) 
         {
             StopAllCoroutines();
-            
+            SoundManager.PlayJumpSound();//Plays jump SFX when moving
             //If the current node is above the player, climbing
             if (worldCursor.transform.position.y >= transform.position.y)
             {

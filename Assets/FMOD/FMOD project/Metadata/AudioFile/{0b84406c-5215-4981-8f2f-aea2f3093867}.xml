@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{0b84406c-5215-4981-8f2f-aea2f3093867}">
+		<property name="assetPath">
+			<value>Slashing.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.6310204081632653</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{72bb478a-97bb-4e0b-ab4d-91e93720ceed}</destination>
+		</relationship>
+	</object>
+</objects>
